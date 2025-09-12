@@ -10,7 +10,7 @@ const Rating = () => {
         <div className="rating-container">
             <h2>Rate your experience</h2>
             <div className="stars">
-                {stars.map((star, index) => (
+                {stars.map((star) => (
                     <span
                         onClick={() => setRating(star)}
                         onMouseEnter={() => setHover(star)}
