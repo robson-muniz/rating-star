@@ -1,8 +1,10 @@
-const Rating = () => {
-    const stars = Array.from({length: 5}, (_, i) => i + 1);
+import {useState} from "react";
 
-    const clicked = (index) => console.log('clicked', index);
-    const hovered = (direction, index) => console.log('hovered', direction, index);
+const Rating = () => {
+    const [rating, setRating] = useState(0)
+   const [hover, setHover ] = useState(0)
+    
+    const stars = Array.from({length: 5}, (_, i) => i + 1);
 
     return (
         <div className="rating-container">
@@ -10,12 +12,13 @@ const Rating = () => {
             <div className="stars">
                 {stars.map((star, index) => (
                     <span
-                        onClick={() =>clicked(index)}
-                        onMouseEnter={() => hovered ('enter', index)}
-                        onMouseLeave={() => hovered ('leave', index)}
+                        onClick={() => setRating(star)}
+                        onMouseEnter={() => setHover(star)}
+                        onMouseLeave={() => setHover(0)}
                         className= 'star'
                         key={star}>
-                        {'\u2605'}</span>
+                        {'\u2605'}
+                    </span>
                 ))}
             </div>
         </div>
