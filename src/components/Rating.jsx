@@ -3,10 +3,23 @@ import Star from "./Star.jsx";
 
 const Rating = ({heading, color, feedbackMessages}) => {
     const [rating, setRating] = useState(0)
-   const [hover, setHover ] = useState(0)
+    const [hover, setHover ] = useState(0)
+    const [submitted, setSubmitted] = useState(false)
     
     const stars = Array.from({length: 5}, (_, i) => i + 1);
     // const feedbackMessages = ['Terrible', 'Poor', 'Fair', 'Good', 'excellent']
+
+    const handleSubmit = () => {
+        if (rating > 0) {
+            setSubmitted(true)
+            setRating(0)
+            setHover(0)
+        }
+    }
+
+    const closeModal = () => {
+        setSubmitted(false)
+    }
 
     return (
         <div className="rating-container">
@@ -23,20 +36,21 @@ const Rating = ({heading, color, feedbackMessages}) => {
                         hoverEnter={setHover}
                         hoverLeave={() => setHover(null)}
                     />
-                    // <span
-                    //     onClick={() => setRating(star)}
-                    //     onMouseEnter={() => setHover(star)}
-                    //     onMouseLeave={() => setHover(0)}
-                    //     className= {`star`}
-                    //     style={{
-                    //         color: star <= (hover || rating) ? color : '#ccc'
-                    //     }}
-                    //     key={star}>
-                    //     {'\u2605'}
-                    // </span>
                 ))}
             </div>
             {rating > 0 && <p className='feedback'>{feedbackMessages[rating - 1]}</p>}
+            <button className='submit-btn' onClick={handleSubmit} disabled={rating ===0}>Submit</button>
+
+            {/*{Modal}*/}
+            {submitted && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Thank You</h2>
+                        <p>You rated us {rating} star{rating > 1 ? 's' : ''}</p>
+                        <button className='close-btn' onClick={closeModal}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

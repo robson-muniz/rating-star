@@ -7,11 +7,10 @@ function Star({star, rating, hover, color, ratingClick, hoverEnter,hoverLeave}) 
            onMouseEnter={() => hoverEnter(star)}
            onMouseLeave={hoverLeave}
            className='star'
-           style={{color: star <= (hover || rating) ? color : '#ccc'}}
+           style={{color: star <= (hover || rating) ? color : '#ccc'}}>
 
-       >
-
-           {'\u2605'}</span>
+           {'\u2605'}
+       </span>
     );
 }
 
